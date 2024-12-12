@@ -1,0 +1,106 @@
+<nav
+  id="navbar"
+  class="bg-white bg-opacity-60 fixed top-0 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-700 ease-in-out w-screen"
+  [ngClass]="{
+    'bg-gray-100 shadow-md': isSticky,
+    'bg-inherit': !isSticky
+  }"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <img
+          src="logo_blanco.png"
+          class="w-40 m-9"
+          alt="Logo"
+          routerLink="/home"
+        />
+      </div>
+
+      <!-- Menú para pantallas grandes -->
+      <div class="hidden md:flex space-x-8">
+        <a
+          (click)="scrollTo('Home', 'Home')"
+          [ngClass]="{ 'underline text-blue-500': activeSection === 'Home' }"
+          class="nav-link text-gray-700 hover:text-blue-500 cursor-pointer"
+          >Inicio</a
+        >
+        <a
+          (click)="scrollTo('about', 'about')"
+          [ngClass]="{ 'underline text-blue-500': activeSection === 'about' }"
+          class="nav-link text-gray-700 hover:text-blue-500 cursor-pointer"
+          >Servicios</a
+        >
+        <a
+          (click)="scrollTo('services', 'services')"
+          [ngClass]="{
+            'underline text-blue-500': activeSection === 'services'
+          }"
+          class="nav-link text-gray-700 hover:text-blue-500 cursor-pointer"
+          >Nosotros</a
+        >
+        <a
+          (click)="scrollTo('contact', 'contact')"
+          [ngClass]="{ 'underline text-blue-500': activeSection === 'contact' }"
+          class="nav-link text-gray-700 hover:text-blue-500 cursor-pointer"
+          >Contacto</a
+        >
+      </div>
+
+      <!-- Menú para móviles -->
+      <div class="md:hidden">
+        <button
+          (click)="toggleMenu()"
+          class="text-gray-500 hover:text-blue-500 focus:outline-none"
+        >
+          <svg
+            class="h-8 w-8"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú colapsable para móviles con transición -->
+  <div
+    class="bg-white opacity-70 md:hidden px-4 flex items-center flex-col w-screen transition-all duration-500 ease-in-out overflow-hidden"
+    [ngClass]="{
+      'max-h-96 opacity-100': isMenuOpen,
+      'max-h-0 opacity-0': !isMenuOpen
+    }"
+  >
+    <a
+      (click)="scrollTo('Home', 'Home')"
+      [ngClass]="{ 'underline text-blue-500': activeSection === 'Home' }"
+      class="mb-4 block text-black mt-4 hover:text-blue-500 border-b border-black pb-2 cursor-pointer"
+      >Inicio</a
+    >
+    <a
+    (click)="scrollTo('about', 'about')"
+      [ngClass]="{ 'underline text-blue-500': activeSection === 'about' }"
+      class="mb-4 block text-black hover:text-blue-500 border-b border-black pb-2 cursor-pointer"
+      >Servicios</a
+    >
+    <a
+      (click)="scrollTo('services', 'services')"
+      [ngClass]="{ 'underline text-blue-500': activeSection === 'services' }"
+      class="mb-4 block text-black hover:text-blue-500 border-b border-black pb-2 cursor-pointer"
+      >Nosotros</a
+    >
+    <a
+      (click)="scrollTo('contact', 'contact')"
+      [ngClass]="{ 'underline text-blue-500': activeSection === 'contact' }"
+      class="mb-4 block text-black hover:text-blue-500 border-b border-black pb-2 cursor-pointer"
+      >Contacto</a
+    >
+  </div>
+</nav>
