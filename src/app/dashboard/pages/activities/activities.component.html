@@ -1,0 +1,70 @@
+<div class="bg-gray-100 p-5 pb-20">
+  <div class="flex gap-2 flex-col mb-10 mt-10 items-center">
+    <h2 class="text-4xl m-5 font-bold">Actividades</h2>
+    <p class="text-xl m-5">
+      Si quieres más información o reservar plaza para cualquiera de nuestras
+      actividades
+    </p>
+    <app-button
+      [buttonText]="'Contactanos'"
+      class="bg-white border mb-5 border-blue-500 text-blue-500 px-5 py-1 rounded hover:bg-blue-500 hover:text-white cursor-pointer"
+    ></app-button>
+    <p class="text-2xl m-5">¿QUIERES VER TODAS NUESTRAS ACTIVIDADES?</p>
+    <app-button
+      [buttonText]="'Ver todo'"
+      class="bg-white border mb-5 border-blue-500 text-blue-500 px-5 py-1 rounded hover:bg-blue-500 hover:text-white cursor-pointer"
+    ></app-button>
+  </div>
+
+  <!-- Actividades -->
+
+  <div class="grid grid-cols-4 gap-2 w-3/4 m-auto items-stretch">
+    <!-- Baño libre -->
+    <div class="flex flex-col items-center bg-white w-52">
+      <img
+        class="w-full h-32"
+        src="actividades-banio-libre-538x280.jpg"
+        alt="baño libre"
+      />
+      <div class="text-center m-5">
+        <h2 class="text-2xl mb-2">Baño Libre</h2>
+        <p class="text-base text-gray-600">
+          Dispones de una amplia franja horaria para disfrutar de la piscina de
+          25 m., nadando o jugando con tus niños. HORARIO: Lunes a Viernes de 11
+          a 19 h. Sábados y Domingos de 10 a 20 h.
+        </p>
+      </div>
+    </div>
+    <!-- Pileta libre -->
+    <div class="flex flex-col items-center bg-white w-52">
+      <img
+        class="w-full h-32"
+        src="actividades-practicas-538x280.jpg"
+        alt="Prácticas o Preparación"
+      />
+      <div class="text-center m-5">
+        <h2 class="text-2xl mb-2">Prácticas o Preparación</h2>
+        <p class="text-base text-gray-600">
+          Nuestra piscina está a disposición para la práctica de la natación y/o
+          la preparación física o deportiva. HORARIO: Martes, Jueves, Sábados y
+          Domingos de 9 a 10 h. (reserva previa necesaria:
+          <a class="text-blue-500" href="">Reserva aquí</a>).
+        </p>
+      </div>
+    </div>
+    <!-- Masajes -->
+    <div class="flex flex-col items-center bg-white w-52">
+      <img class="w-full h-32" src="masajes-538x280.jpg" alt="Masajes" />
+      <div class="text-center m-5">
+        <h2 class="text-2xl mb-2">Masajes</h2>
+        <p class="text-base text-gray-600">
+          El relax máximo lo conseguirás con un masaje a pie de piscina. Masajes
+          relajantes y descontracturantes que te dejarán como nuevo. MÁS INFO /
+          SOLICITAR CITA PREVIA (SOLO PARA MASAJES): 671 64 82 74 (Sandra).
+        </p>
+      </div>
+    </div>
+    <!-- Surf -->
+    <div></div>
+  </div>
+</div>

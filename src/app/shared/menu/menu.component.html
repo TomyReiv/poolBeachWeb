@@ -46,6 +46,12 @@
           class="nav-link text-gray-700 hover:text-blue-500 cursor-pointer"
           >Contacto</a
         >
+        <a
+        (click)="scrollTo('activities', 'activities')"
+        [ngClass]="{ 'underline text-blue-500': activeSection === 'activities' }"
+        class="nav-link text-gray-700 hover:text-blue-500 cursor-pointer"
+        >Actividades</a
+      >
       </div>
 
       <!-- Menú para móviles -->
