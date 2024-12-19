@@ -41,17 +41,19 @@
           >Nosotros</a
         >
         <a
+          (click)="scrollTo('activities', 'activities')"
+          [ngClass]="{
+            'underline text-blue-500': activeSection === 'activities'
+          }"
+          class="nav-link text-gray-700 hover:text-blue-500 cursor-pointer"
+          >Actividades</a
+        >
+        <a
           (click)="scrollTo('contact', 'contact')"
           [ngClass]="{ 'underline text-blue-500': activeSection === 'contact' }"
           class="nav-link text-gray-700 hover:text-blue-500 cursor-pointer"
           >Contacto</a
         >
-        <a
-        (click)="scrollTo('activities', 'activities')"
-        [ngClass]="{ 'underline text-blue-500': activeSection === 'activities' }"
-        class="nav-link text-gray-700 hover:text-blue-500 cursor-pointer"
-        >Actividades</a
-      >
       </div>
 
       <!-- Menú para móviles -->
@@ -91,7 +93,7 @@
       >Inicio</a
     >
     <a
-    (click)="scrollTo('about', 'about')"
+      (click)="scrollTo('about', 'about')"
       [ngClass]="{ 'underline text-blue-500': activeSection === 'about' }"
       class="mb-4 block text-black hover:text-blue-500 border-b border-black pb-2 cursor-pointer"
       >Servicios</a
@@ -101,6 +103,12 @@
       [ngClass]="{ 'underline text-blue-500': activeSection === 'services' }"
       class="mb-4 block text-black hover:text-blue-500 border-b border-black pb-2 cursor-pointer"
       >Nosotros</a
+    >
+    <a
+      (click)="scrollTo('activities', 'activities')"
+      [ngClass]="{ 'underline text-blue-500': activeSection === 'activities' }"
+      class="mb-4 block text-black hover:text-blue-500 border-b border-black pb-2 cursor-pointer"
+      >Actividades</a
     >
     <a
       (click)="scrollTo('contact', 'contact')"

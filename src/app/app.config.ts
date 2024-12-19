@@ -3,7 +3,7 @@ import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +15,9 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideClientHydration(),
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(
+      withFetch(), // Habilita fetch para HttpClient
+      withInterceptorsFromDi() // Mantén tus interceptores configurados
+    )
   ],
 };

@@ -1,0 +1,33 @@
+<div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4">
+  <div class="bg-white max-h-[90vh] rounded-lg shadow-lg p-6 w-full max-w-md md:max-w-lg relative overflow-hidden">
+    <!-- Botón de cierre -->
+    <button 
+      class="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+      (click)="closeModal()"
+    >
+      &#x2715;
+    </button>
+
+    <!-- Imagen del evento -->
+    <img
+      class="w-full h-40 sm:h-48 md:h-56 object-cover rounded-lg mb-4"
+      [src]="eventData.image"
+      [alt]="eventData.title"
+    />
+
+    <!-- Contenido del modal -->
+    <h2 class="text-xl md:text-2xl font-bold mb-2">{{ eventData.title }}</h2>
+    <p class="text-gray-500 text-sm md:text-base italic mb-4">Fecha: {{ eventData.date }}</p>
+    <p class="text-gray-700 text-sm md:text-base mb-4">{{ eventData.description }}</p>
+
+    <div class="mb-4">
+      <h3 class="font-semibold text-sm md:text-base">Menú</h3>
+      <p class="text-gray-700 text-sm md:text-base">{{ eventData.menu }}</p>
+    </div>
+
+    <div class="mb-6">
+      <p class="text-lg font-bold text-gray-800">Precio: {{ eventData.price }} €</p>
+      <p class="text-sm text-gray-500">Reservas: {{ eventData.booking }}</p>
+    </div>
+  </div>
+</div>

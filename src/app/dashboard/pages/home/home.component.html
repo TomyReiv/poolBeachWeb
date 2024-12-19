@@ -1,3 +1,9 @@
+<app-modal 
+  [eventData]="eventData" 
+  [showModal]="showModal" 
+  (modalClose)="closeModal()"
+></app-modal>
+
 <section id="Home">
   <app-header></app-header>
 </section>
@@ -10,16 +16,20 @@
   <app-info-home></app-info-home>
 </section>
 
+<section id="image">
+  <app-carrusel></app-carrusel>
+</section>
+
 <section class="relative w-full overflow-hidden" id="parallax">
   <app-parallax></app-parallax>
 </section>
 
-<section id="contact">
-  <app-contact></app-contact>
-</section>
-
 <section id="activities">
   <app-activities></app-activities>
+</section>
+
+<section id="contact">
+  <app-contact></app-contact>
 </section>
 
 <app-footer></app-footer>

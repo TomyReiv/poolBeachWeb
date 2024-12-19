@@ -18,7 +18,7 @@ export const routes: Routes = [
             {
                 path: 'contact',
                 title: 'Contact',
-                loadComponent: () => import('./dashboard/pages/contact/contact.component')
+                loadComponent: () => import('./dashboard/pages/home-components/contact/contact.component')
             },
             {
                 path: '',

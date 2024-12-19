@@ -1,0 +1,83 @@
+<div class="flex mt-10 mb-10 flex-col w-full justify-center">
+  <div class="flex flex-col w-2/3 m-auto justify-center">
+    <h1 class="sm:text-5xl md:text-5xl text-3xl font-bold text-center m-5">
+      Contacta con nosotros
+    </h1>
+    <p class="text-center m-5 text-lg">
+      Rellena el formulario con tu consulta o mensaje y te responderemos lo
+      antes posible. Para comunicarte por reservas para el chiringuito vía
+      WhatsApp al +34 613994853 de lunes a domingo de 10 a 11hs.
+    </p>
+    <p class="flex items-center m-auto text-base mb-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        class="bi bi-geo-alt-fill w-6 h-8w-6 mr-2 text-sky-500"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"
+        />
+      </svg>
+      <a
+        class="text-sky-500"
+        href="https://www.google.com/maps/place//data=!4m2!3m1!1s0xd60475eb8965613:0x6e8892c5651bb6dd?source=g.page.share"
+        >Encuéntranos al final del Paseo Marítimo de Playa Norte. Port Saplaya,
+        Alboraya. VALENCIA.</a
+      >
+    </p>
+  </div>
+
+  <div class="flex flex-col mt-10 gap-2 w-full p-3 sm:p-0 md:p-0 md:w-2/4 sm:w-2/4 m-auto mb-10">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2">
+        <div class="flex flex-col gap-2">
+          <label class="font-bold mb-2" for="name">NOMBRE Y APELLIDOS (*)</label>
+          <input
+            class="border rounded border-gray-400 p-2"
+            formControlName="name"
+            type="text"
+          />
+          <div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.invalid" class="text-red-500 text-sm">
+            El nombre es obligatorio.
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="font-bold mb-2" for="email">Email (*)</label>
+          <input
+            class="border rounded border-gray-400 p-2"
+            formControlName="email"
+            type="email"
+          />
+          <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid" class="text-red-500 text-sm">
+            Por favor, ingresa un correo electrónico válido.
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <label class="font-bold mb-2" for="about">ASUNTO</label>
+        <input
+          class="border rounded border-gray-400 p-2"
+          formControlName="subject"
+          type="text"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <label class="font-bold mb-2" for="message">MENSAJE</label>
+        <textarea
+          class="border h-40 rounded border-gray-400"
+          formControlName="message"
+        ></textarea>
+        <div *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.invalid" class="text-red-500 text-sm">
+          El mensaje es obligatorio.
+        </div>
+      </div>
+      <button
+        [disabled]="contactForm.invalid"
+        class="bg-blue-500 text-white w-full mt-5 p-3 text-xl hover:bg-blue-400"
+      >
+        Enviar
+      </button>
+    </form>
+  </div>
+</div>
