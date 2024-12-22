@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "eventId": 1,
+      "name": "Juan Pérez",
+      "contact": "juanperez@mail.com",
+      "guests": 2,
+      "date": "2024-06-23T21:30:00",
+      "status": "confirmed"
+    },
+    {
+      "id": 2,
+      "eventId": 1,
+      "name": "Maria García",
+      "contact": "mariagarcia@mail.com",
+      "guests": 3,
+      "date": "2024-06-23T21:30:00",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "eventId": 2,
+      "name": "Carlos López",
+      "contact": "carloslopez@mail.com",
+      "guests": 4,
+      "date": "2024-08-15T20:00:00",
+      "status": "confirmed"
+    },
+    {
+      "id": 4,
+      "eventId": 2,
+      "name": "Lucía Martínez",
+      "contact": "luciamartinez@mail.com",
+      "guests": 2,
+      "date": "2024-08-20T20:00:00",
+      "status": "pending"
+    }
+  ]
+  

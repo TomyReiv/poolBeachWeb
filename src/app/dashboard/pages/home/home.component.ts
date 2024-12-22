@@ -7,7 +7,7 @@ import { InfoHomeComponent } from "../home-components/info-home/info-home.compon
 import ContactComponent from '../home-components/contact/contact.component';
 import { ParallaxComponent } from '../home-components/parallax/parallax.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderComponent } from '../home-components/header/header.component';
 import { ActivitiesComponent } from '../home-components/activities/activities.component';
 import { CarruselComponent } from '../home-components/carrusel/carrusel.component';
 import { ModalComponent } from '../home-components/modal/modal.component';
