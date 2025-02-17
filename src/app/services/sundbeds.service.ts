@@ -4,14 +4,14 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class EventsService {
+export class SundbedsService {
   private http = inject(HttpClient);
-  private readonly cartUrl: string = environment.apiUrlBack;
+  private readonly url: string = environment.apiUrlBack;
 
-  getEvents(): Observable<any>{
-    const url = `${environment.apiUrlBack}api/event`;
-    return this.http.get(url, { withCredentials: true })
+  getSundbeds(date:any): Observable<any> {
+
+    return this.http.get(`${this.url}api/sunbed?date=${date}`);
   }
 }

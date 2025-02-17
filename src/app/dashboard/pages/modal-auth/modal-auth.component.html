@@ -1,0 +1,66 @@
+<div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4">
+    <div class="bg-white max-h-[90vh] rounded-lg shadow-lg w-full max-w-md relative overflow-hidden p-6">
+      <!-- Botón de cierre -->
+      <!-- <button
+        class="absolute top-2 right-2 text-xl font-bold text-gray-500 hover:text-gray-700"
+        (click)="closeModal()"
+      >
+        &#x2715;
+      </button> -->
+  
+      <!-- Título -->
+      <h2 class="text-2xl font-bold text-center mb-6">Iniciar Sesión</h2>
+  
+      <!-- Campos de entrada -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">Correo Electrónico</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="ejemplo@email.com"
+        />
+      </div>
+  
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-semibold mb-2">Contraseña</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="••••••••"
+        />
+      </div>
+  
+      <!-- Botón de inicio de sesión -->
+      <button
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200"
+        (click)="login()"
+      >
+        Iniciar Sesión
+      </button>
+  
+      <!-- Separador -->
+      <div class="flex items-center my-4">
+        <hr class="flex-grow border-gray-300" />
+        <span class="mx-2 text-gray-500 text-sm">o</span>
+        <hr class="flex-grow border-gray-300" />
+      </div>
+  
+      <!-- Botón de Google -->
+      <button
+        class="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-100 transition duration-200"
+        (click)="loginWithGoogle()"
+      >
+        <img src="assets/google-icon.svg" alt="Google" class="w-5 h-5" />
+        Continuar con Google
+      </button>
+  
+      <!-- Botón de registro -->
+      <p class="text-center text-sm text-gray-600 mt-4">
+        ¿No tienes cuenta?
+        <button class="text-blue-600 hover:underline" (click)="goToRegister()">Regístrate</button>
+      </p>
+    </div>
+  </div>
+  

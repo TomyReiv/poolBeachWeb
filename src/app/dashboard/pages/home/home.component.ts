@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import {  inject } from '@angular/core';
 import { UsHomeComponent } from '../home-components/us-home/us-home.component';
-import { InfoHomeComponent } from "../home-components/info-home/info-home.component";
+import { InfoHomeComponent } from '../home-components/info-home/info-home.component';
 import ContactComponent from '../home-components/contact/contact.component';
 import { ParallaxComponent } from '../home-components/parallax/parallax.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
@@ -12,6 +11,7 @@ import { ActivitiesComponent } from '../home-components/activities/activities.co
 import { CarruselComponent } from '../home-components/carrusel/carrusel.component';
 import { ModalComponent } from '../home-components/modal/modal.component';
 import { EventsService } from '../../../services/events.service';
+import { MenuComponent } from '../../../shared/menu/menu.component';
 
 @Component({
   selector: 'app-home',
@@ -26,28 +26,37 @@ import { EventsService } from '../../../services/events.service';
     FooterComponent,
     ActivitiesComponent,
     CarruselComponent,
-    ModalComponent
-],
+    ModalComponent,
+    MenuComponent,
+  ],
   styleUrl: './home.component.css',
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class HomeComponent { 
-  private router = inject(Router)
+export default class HomeComponent {
+  private router = inject(Router);
 
   redirectTo(path: string): void {
     this.router.navigate([`/dashboard/${path}`]);
   }
 
   showModal: boolean = false;
-  eventData: { title: string; description: string; image: string, date: Date, menu:String, price:Number, booking:String } = {
+  eventData: {
+    title: string;
+    description: string;
+    image: string;
+    date: string;
+    menu: String;
+    price: Number;
+    phone: String;
+  } = {
     title: '',
     description: '',
     image: '',
-    date: new Date(),
+    date: '',
     menu: '',
     price: 0,
-    booking: ''
+    phone: '',
   };
 
   private eventService = inject(EventsService);
@@ -58,8 +67,11 @@ export default class HomeComponent {
 
   checkForEvent() {
     this.eventService.getEvents().subscribe((events: any) => {
-      if (events.length > 0) {
-        this.eventData = events[0];
+      if (events.data.length > 0) {
+        this.eventData = events.data[events.data.length - 1];
+        const fechaObjeto = new Date(this.eventData.date);
+        const fechaString = fechaObjeto.toISOString().split('T')[0];
+        this.eventData.date = fechaString;
         this.showModal = true;
       }
     });

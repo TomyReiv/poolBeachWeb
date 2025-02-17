@@ -11,14 +11,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styles: ``
 })
 export class ModalComponent {
-  @Input() eventData: { title: string; description: string; image: string, date: Date, menu:String, price:Number, booking:String } = {
+  @Input() eventData: { title: string; description: string; image: string, date: string, menu:String, price:Number, phone:String } = {
     title: '',
     description: '',
     image: '',
-    date: new Date(),
+    date: '',
     menu: '',
     price: 0,
-    booking: ''
+    phone: ''
   };
   @Input() showModal: boolean = false;
   @Output() modalClose = new EventEmitter<void>();

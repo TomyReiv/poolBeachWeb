@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class FooterComponent {
-
+  redirect(){
+    window.location.href = '/dashboard/Reserva';
+  }
 }

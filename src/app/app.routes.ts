@@ -11,6 +11,11 @@ export const routes: Routes = [
         loadComponent: () => import('./dashboard/pages/home/home.component'),
       },
       {
+        path: 'Reserva',
+        title: 'Reserva',
+        loadComponent: () => import('./dashboard/pages/booking/booking.component'),
+      },
+      {
         path: 'Admin',
         title: 'Admin',
         loadComponent: () =>

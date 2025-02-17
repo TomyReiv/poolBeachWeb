@@ -47,6 +47,10 @@ export class MenuComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  redirect(){
+    window.location.href = '/dashboard/Home';
+  }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollPos = window.pageYOffset || document.documentElement.scrollTop;

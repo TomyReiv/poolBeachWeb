@@ -1,15 +1,26 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { BookingService } from '../../../services/booking-service';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup,  ReactiveFormsModule,  Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { AdminService } from '../../../services/admin.service';
+import { HttpClient } from '@angular/common/http';
+import { ModalAuthComponent } from '../modal-auth/modal-auth.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, ModalAuthComponent],
   templateUrl: './admin.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,36 +29,91 @@ export class AdminComponent {
   reservations: any[] = [];
   reservationsByDate: any[] = [];
   isAdmin: boolean = true;
+  selectedFile: File | null = null;
+  showModal: boolean = false;
+  public authState: any = false;
 
   private bookingService = inject(BookingService);
+  private adminService = inject(AdminService);
+  private authService = inject(AuthService);
 
   ngOnInit() {
-    this.loadReservations();
-    console.log('Es admin?: ',this.isAdmin);
-    
+    this.adminService.bookings().subscribe((response: any) => {
+      this.reservations = response.data;
+    });
+    this.authState = this.authService.authState$;
+    if (!this.authState) {
+      this.showModal = true;
+    }
   }
 
   eventForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  closeModal() {
+    if (this.authState) {
+      this.showModal = false;
+    }
+  }
+
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.eventForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       date: ['', Validators.required],
       menu: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(1)]],
-      booking: ['', Validators.required],
-      image: ['', Validators.required],
+      image: [null, Validators.required],
     });
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+  /* 
+  login(username: string, password: string) {
+    this.authService.login(username, password).subscribe((response: any) => {
+      if(response.status === 200) {
+      this.authState = true;
+      this.showModal = false;
+      } else {
+        alert('Usuario o contraseña incorrectos');
+      }
+    })
+  } */
+
   onSubmit(): void {
     if (this.eventForm.valid) {
-      const newEvent = this.eventForm.value;
       try {
-        alert('Evento creado exitosamente');
-        this.eventForm.reset();
-        this.loadReservations();
+        if (!this.selectedFile) {
+          console.error('No file selected');
+          return;
+        }
+        const formData = new FormData();
+        Object.keys(this.eventForm.controls).forEach((key) => {
+          if (key !== 'image') {
+            // Evitar 'image' porque se maneja aparte
+            formData.append(key, this.eventForm.get(key)?.value);
+          }
+        });
+
+        // Agregar el archivo correctamente
+        if (this.selectedFile) {
+          formData.append('image', this.selectedFile, this.selectedFile.name);
+        }
+
+        this.adminService.sendEvent(formData).subscribe((response: any) => {
+          console.log('Evento creado exitosamente:', response);
+          if (response.status === 200) {
+            alert('Evento creado exitosamente');
+            this.eventForm.reset();
+            this.selectedFile = null;
+          } else {
+            alert('Error al crear evento. Inténtalo de nuevo.');
+          }
+        });
       } catch (error) {
         console.error('Error al crear evento:', error);
         alert('Error al crear evento. Inténtalo de nuevo.');
@@ -71,9 +137,9 @@ export class AdminComponent {
   }
 
   loadReservations() {
-    this.bookingService.getReservas().subscribe((data) => {
-      data.sort((a, b) => a.date - b.date);
-      this.reservations = data;
+    this.adminService.bookings().subscribe((data: any) => {
+      data.sort((a: any, b: any) => a.date - b.date);
+      this.reservations = data.data;
       this.groupReservationsByDate();
     });
   }
