@@ -25,7 +25,7 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'Home',
+        redirectTo: 'dashboard/Home',
         pathMatch: 'full',
       },
     ],
