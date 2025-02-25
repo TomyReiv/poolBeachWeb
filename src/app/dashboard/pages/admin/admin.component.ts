@@ -39,9 +39,11 @@ export class AdminComponent {
 
   ngOnInit() {
     this.adminService.bookings().subscribe((response: any) => {
-      this.reservations = response.data;
+      this.reservations = response.data; 
     });
-    this.authState = this.authService.authState$;
+    this.authService.authState$.subscribe((value) => {
+      this.authState = value;
+      }); 
     if (!this.authState) {
       this.showModal = true;
     }
@@ -145,8 +147,10 @@ export class AdminComponent {
   }
 
   deleteReservation(id: string) {
+    console.log('Eliminar reserva:', id);
+    
     if (confirm('¿Estás seguro de que deseas eliminar esta reserva?')) {
-      this.bookingService.deleteReserva(id).subscribe(() => {
+      this.adminService.deleteBooking(id).subscribe(() => {
         this.loadReservations(); // Recargar datos
       });
     }

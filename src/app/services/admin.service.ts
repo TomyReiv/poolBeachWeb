@@ -38,7 +38,7 @@ export class AdminService {
     formData.append("price", event.get("price"));
   
     const imageFile = event.get("image");
-    console.log('imageFile:', imageFile);
+
     if (imageFile) {
       formData.append("image", imageFile);
     }
@@ -46,6 +46,13 @@ export class AdminService {
     return this.http.post(`${environment.apiUrlBack}api/event`, formData, {
       withCredentials: true,
     });
+  }
+
+  deleteBooking(id: string) {
+    return this.http
+      .delete(`${environment.apiUrlBack}api/booking/${id}`, {
+        withCredentials: true,
+      })
   }
   
 }

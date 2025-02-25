@@ -1,7 +1,5 @@
 <!-- Posible inicio de sesion -->
- <app-modal-auth  
-  [showModal]="showModal" 
-></app-modal-auth> 
+<app-modal-auth [showModal]="showModal"></app-modal-auth>
 
 <div class="container sm:w-3/5 mx-auto px-4 py-6">
   <!-- Formulario de Cargar Eventos -->
@@ -24,7 +22,7 @@
         class="w-full border rounded px-3 py-2"
         placeholder="Título del evento"
       />
-     <small
+      <small
         *ngIf="
           eventForm.get('title')?.invalid && eventForm.get('title')?.touched
         "
@@ -62,7 +60,7 @@
         formControlName="date"
         class="w-full border rounded px-3 py-2"
       />
-    <small
+      <small
         *ngIf="eventForm.get('date')?.invalid && eventForm.get('date')?.touched"
         class="text-red-500"
         >La fecha es obligatoria.</small
@@ -78,11 +76,11 @@
         rows="3"
         placeholder="Menú del evento"
       ></textarea>
-       <small
+      <small
         *ngIf="eventForm.get('menu')?.invalid && eventForm.get('menu')?.touched"
         class="text-red-500"
         >El menú es obligatorio.</small
-      > 
+      >
     </div>
 
     <div class="mb-4">
@@ -96,15 +94,14 @@
         class="w-full border rounded px-3 py-2"
         placeholder="Precio por persona"
       />
-     <small
+      <small
         *ngIf="
           eventForm.get('price')?.invalid && eventForm.get('price')?.touched
         "
         class="text-red-500"
         >El precio debe ser mayor que 0.</small
-      > 
+      >
     </div>
-
 
     <div class="mb-4">
       <label for="image" class="block text-gray-700 font-semibold"
@@ -118,16 +115,17 @@
         class="w-full border rounded px-3 py-2"
         placeholder="URL de la imagen del evento"
       />
-     <small
+      <small
         *ngIf="
           eventForm.get('image')?.invalid && eventForm.get('image')?.touched
         "
         class="text-red-500"
         >La URL de la imagen es obligatoria.</small
-      > 
+      >
     </div>
     <!--  -->
     <button
+      aria-label="Cargar Evento"
       type="submit"
       [disabled]="eventForm.invalid"
       class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
@@ -139,47 +137,48 @@
 
   <!-- Tabla de Reservas -->
   @if(reservations.length > 0){
-    <div class="bg-white shadow rounded overflow-x-auto">
-      <table class="table-auto min-w-full text-left border-collapse">
-        <thead class="bg-gray-200 text-gray-600 uppercase text-sm">
-          <tr>
-            <th class="py-3 px-4">Día Reservado</th>
-            <th class="py-3 px-4">Nombre</th>
-            <th class="py-3 px-4">Pago</th>
-            <th class="py-3 px-4">Reserva</th>
-            <th class="py-3 px-4">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (reserva of reservations; track $index) {
-            <tr>
-              <td class="py-3 px-4 whitespace-nowrap">{{ reserva.date | date }}</td>
-              <td class="py-3 px-4 whitespace-nowrap">{{ reserva.name }}</td>
-              <td class="py-3 px-4 whitespace-nowrap">{{ reserva.amount }}</td>
-              <td class="py-3 px-4 whitespace-nowrap">
-                <div class="flex flex-wrap gap-2">
-                  @for (item of reserva.type; track $index) {
-                    <span class="px-2 py-1 bg-gray-100 rounded-md border">
-                      {{ item.name }}: {{ item.amount }}
-                    </span>
-                  }
-                </div>
-              </td>
-              <td class="py-3 px-4">
-                @if (isAdmin) {
-                  <button 
-                    (click)="deleteReservation(reserva.id)"
-                    class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded"
-                  >
-                    Eliminar
-                  </button>
-                }
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
-    
+  <div class="bg-white shadow rounded overflow-x-auto">
+    <table class="table-auto min-w-full text-left border-collapse">
+      <thead class="bg-gray-200 text-gray-600 uppercase text-sm">
+        <tr>
+          <th class="py-3 px-4">Día Reservado</th>
+          <th class="py-3 px-4">Nombre</th>
+          <th class="py-3 px-4">Pago</th>
+          <th class="py-3 px-4">Reserva</th>
+          <th class="py-3 px-4">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (reserva of reservations; track $index) {
+        <tr>
+          <td class="py-3 px-4 whitespace-nowrap">{{ reserva.date | date }}</td>
+          <td class="py-3 px-4 whitespace-nowrap">{{ reserva.name }}</td>
+          <td class="py-3 px-4 whitespace-nowrap">{{ reserva.amount }}</td>
+          <td class="py-3 px-4 whitespace-nowrap">
+            <div class="flex flex-wrap gap-2">
+              @for (item of reserva.type; track $index) {
+              <span class="px-2 py-1 bg-gray-100 rounded-md border">
+                {{ item.name }}: {{ item.amount }}
+              </span>
+              }
+            </div>
+          </td>
+          <td class="py-3 px-4">
+            @if (isAdmin) {
+            <button
+              aria-label="Eliminar Reserva"
+              (click)="deleteReservation(reserva._id)"
+              class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded"
+            >
+              Eliminar
+            </button>
+            }
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
   }
 </div>

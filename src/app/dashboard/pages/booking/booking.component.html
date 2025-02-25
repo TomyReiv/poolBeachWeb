@@ -84,6 +84,7 @@
       </div>
       <div>
         <select
+          [hidden]="isToday && item.name !== 'General'"
           name="numero"
           id="numero"
           class="border border-black p-1 rounded-md"
@@ -96,7 +97,10 @@
       </div>
     </div>
     }
-    <button (click)="addToCart()" (click)="openCartModal()"
+    <button
+      aria-label="Reservar"
+      (click)="addToCart()"
+      (click)="openCartModal()"
       class="bg-blue-500 w-full md:w1/3 sm:w-1/3 text-white px-4 py-2 rounded hover:bg-blue-400 cursor-pointer m-5"
     >
       Reservar

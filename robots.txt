@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin
+Allow: /home
+Allow: /booking
+
+Sitemap: https://www.poolbeach.es/sitemap.xml

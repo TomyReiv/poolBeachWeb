@@ -26,7 +26,7 @@ import { ModalCartComponent } from '../modal-cart/modal-cart.component';
 })
 export default class BookingComponent {
   private sundbedsService = inject(SundbedsService);
-/*   private authService = inject(AuthService); */
+  /*   private authService = inject(AuthService); */
   private cdr = inject(ChangeDetectorRef);
   private cartService = inject(CartService);
 
@@ -34,12 +34,14 @@ export default class BookingComponent {
   showModal: boolean = false;
   public authState: any = false;
   public items: Sunbed[] = [];
-  public date: string =
-    /* new Date().toISOString().split('T')[0] || */ '2025-06-01';
+  public date: string = /* new Date().toISOString().split('T')[0] || */ '2025-06-01';
   public numbers: number[] = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
   ];
+  isToday: boolean = false;
+  today: string = /* new Date().toISOString().split('T')[0]  */'2025-06-01';
+
   selectedItems: {
     [key: string]: { name: string; amount: number; price: number };
   } = {};
@@ -93,6 +95,7 @@ export default class BookingComponent {
 
   ngOnInit() {
     this.getSundbeds();
+    if (this.today === this.date) this.isToday = true;
     /* this.authState = this.authService.checkAuth(); */
     if (!this.authState) {
       this.showModal = true;
@@ -102,9 +105,18 @@ export default class BookingComponent {
   onDateChange(event: Event) {
     const target = event.target as HTMLInputElement;
     this.date = target.value;
+    this.isToday = this.today === this.date;
+  
+    this.cdr.detectChanges(); // Forzar actualización de la vista
+
     this.sundbedsService.getSundbeds(this.date).subscribe((data: any) => {
-      this.items = data.data[0].entries;
-      this.cdr.detectChanges();
+      if (data?.data?.length > 0 && data.data[0].entries) {
+        this.items = data.data[0].entries;
+        this.cdr.detectChanges();
+      } else {
+        console.log('No se encontraron entradas para la fecha seleccionada');
+        this.items = []; // Evitar errores en el template
+      }
     });
   }
 
