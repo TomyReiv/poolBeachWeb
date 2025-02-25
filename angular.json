@@ -20,7 +20,7 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
-                "glob": "_redirects",
+                "glob": "prerendered-routes.json",
                 "input": "public",
                 "output": "/"
               }
