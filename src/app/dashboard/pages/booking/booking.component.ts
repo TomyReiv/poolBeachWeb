@@ -90,7 +90,7 @@ export default class BookingComponent {
   }
 
   redirect() {
-    window.location.href = '/dashboard/Home';
+    window.location.href = '/Home';
   }
 
   ngOnInit() {

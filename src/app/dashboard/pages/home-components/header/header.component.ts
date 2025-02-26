@@ -24,6 +24,6 @@ export class HeaderComponent {
     this.activeSection = sectionName;
   }
   redirect(){
-    window.location.href = '/dashboard/Reserva';
+    window.location.href = '/Reserva';
   }
 }

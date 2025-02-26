@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   redirect(){
-    window.location.href = '/dashboard/Reserva';
+    window.location.href = '/Reserva';
   }
 }

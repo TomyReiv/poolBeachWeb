@@ -37,7 +37,7 @@ export default class HomeComponent {
   private router = inject(Router);
 
   redirectTo(path: string): void {
-    this.router.navigate([`/dashboard/${path}`]);
+    this.router.navigate([`/${path}`]);
   }
 
   showModal: boolean = false;

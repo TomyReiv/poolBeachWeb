@@ -48,7 +48,7 @@ export class MenuComponent {
   }
 
   redirect(){
-    window.location.href = '/dashboard/Home';
+    window.location.href = '/Home';
   }
 
   @HostListener('window:scroll', [])

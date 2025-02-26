@@ -16,6 +16,6 @@ export class UsHomeComponent {
   private router = inject(Router)
 
   redirectTo(path: string): void {
-   window.location.href = `/dashboard/${path}`;
+   window.location.href = `/${path}`;
   }
 }
