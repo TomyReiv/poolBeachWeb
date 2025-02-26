@@ -64,7 +64,6 @@ export default class HomeComponent {
 
   ngOnInit() {
     this.checkForEvent();
-    this.cdr.detectChanges();
   }
 
   checkForEvent() {
@@ -74,6 +73,7 @@ export default class HomeComponent {
         const fechaObjeto = new Date(this.eventData.date);
         const fechaString = fechaObjeto.toISOString().split('T')[0];
         this.eventData.date = fechaString;
+        this.cdr.detectChanges();
         this.showModal = true;
       }
     });
