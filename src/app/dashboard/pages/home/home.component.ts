@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsHomeComponent } from '../home-components/us-home/us-home.component';
 import { InfoHomeComponent } from '../home-components/info-home/info-home.component';
@@ -35,6 +35,7 @@ import { MenuComponent } from '../../../shared/menu/menu.component';
 })
 export default class HomeComponent {
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   redirectTo(path: string): void {
     this.router.navigate([`/${path}`]);
@@ -63,6 +64,7 @@ export default class HomeComponent {
 
   ngOnInit() {
     this.checkForEvent();
+    this.cdr.detectChanges();
   }
 
   checkForEvent() {

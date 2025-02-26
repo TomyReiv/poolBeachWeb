@@ -77,6 +77,7 @@ export default class BookingComponent {
       (data: any) => {
         if (data?.data?.length > 0 && data.data[0].entries) {
           this.items = data.data[0].entries;
+          this.cdr.detectChanges();
         } else {
           console.warn('No se encontraron entradas para la fecha seleccionada');
           this.items = []; // Evitar errores en el template
@@ -95,6 +96,7 @@ export default class BookingComponent {
 
   ngOnInit() {
     this.getSundbeds();
+    this.cdr.detectChanges();
     if (this.today === this.date) this.isToday = true;
     /* this.authState = this.authService.checkAuth(); */
     if (!this.authState) {
