@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { UsHomeComponent } from '../home-components/us-home/us-home.component';
 import { InfoHomeComponent } from '../home-components/info-home/info-home.component';
@@ -73,8 +78,9 @@ export default class HomeComponent {
         const fechaObjeto = new Date(this.eventData.date);
         const fechaString = fechaObjeto.toISOString().split('T')[0];
         this.eventData.date = fechaString;
-        this.cdr.detectChanges();
+
         this.showModal = true;
+        /* this.cdr.detectChanges(); */
       }
     });
   }

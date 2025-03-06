@@ -107,7 +107,7 @@ export class AdminComponent {
         }
 
         this.adminService.sendEvent(formData).subscribe((response: any) => {
-          console.log('Evento creado exitosamente:', response);
+          
           if (response.status === 200) {
             alert('Evento creado exitosamente');
             this.eventForm.reset();
@@ -147,7 +147,6 @@ export class AdminComponent {
   }
 
   deleteReservation(id: string) {
-    console.log('Eliminar reserva:', id);
     
     if (confirm('¿Estás seguro de que deseas eliminar esta reserva?')) {
       this.adminService.deleteBooking(id).subscribe(() => {

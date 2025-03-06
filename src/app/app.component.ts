@@ -1,6 +1,5 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MenuComponent } from './shared/menu/menu.component';
 import { SectionService } from './services/section.service';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -8,7 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MenuComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -29,6 +28,7 @@ export class AppComponent {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const sectionId = entry.target.getAttribute('id');
+            if(!sectionId) return;  // Si no hay un id, salimos de la función
             const sectionName = sectionId!.charAt(0).toUpperCase() + sectionId!.slice(1);
             this.sectionService.setActiveSection(sectionName);  // Actualizar la sección activa
           }

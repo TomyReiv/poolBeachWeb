@@ -20,7 +20,10 @@
       <!-- Logo -->
       <div class="flex-shrink-0">
         <img
+          loading="lazy"
           src="logo_blanco.png"
+          width="160"
+          height="160"
           class="w-40 m-9 cursor-pointer"
           alt="Logo"
           routerLink="/home"
@@ -55,6 +58,32 @@
     />
   </div>
 
+  <div class="flex items-center justify-center m-10">
+    <div
+      #captchaContainer
+      class="w-[300px] h-[80px] flex items-center justify-center border border-gray-300 rounded-md"
+    >
+      <div
+        id="hcaptcha"
+        class="h-captcha"
+        data-sitekey="4a2663d6-72f4-43e2-9df4-d88e381e9a28"
+        data-callback="onCaptchaSuccess"
+        data-expired-callback="onCaptchaExpired"
+        data-error-callback="onCaptchaError"
+      ></div>
+    </div>
+  </div>
+
+  <p class="text-center text-red-800">
+    Las tumbonas y balinesas solo se podran reservar con un minimo de un día de
+    anticipación.
+  </p>
+
+  <p class="text-center">
+    No habra reembolsos por cancelaciones de reservas. Preste atención a la
+    fecha de reserva.
+  </p>
+
   <!-- Tarjetas -->
   <div class="flex flex-col gap-4 mt-16 justify-center items-center">
     @if (items.length === 0) {
@@ -65,15 +94,50 @@
     >
       <div>
         @switch (item.name) { @case ('Tumbona cesped') {
-        <img src="descarga.webp" alt="tumbona" class="w-24 h-24 rounded-md" />
+        <img
+          src="descarga.webp"
+          alt="tumbona"
+          class="w-24 h-24 rounded-md"
+          width="96"
+          height="96"
+          loading="lazy"
+        />
         } @case ('Tumbona maritimo') {
-        <img src="maritimo.jfif" alt="tumbona" class="w-24 h-24 rounded-md" />
+        <img
+          src="maritimo.jfif"
+          alt="tumbona"
+          class="w-24 h-24 rounded-md"
+          width="96"
+          height="96"
+          loading="lazy"
+        />
         } @case ('Balinesa x2') {
-        <img src="balinesa.jfif" alt="balinesa" class="w-24 h-24 rounded-md" />
+        <img
+          src="balinesa.jfif"
+          alt="balinesa"
+          class="w-24 h-24 rounded-md"
+          width="96"
+          height="96"
+          loading="lazy"
+        />
         } @case ('Balinesa x4') {
-        <img src="balinesa.jfif" alt="balinesa" class="w-24 h-24 rounded-md" />
+        <img
+          src="balinesa.jfif"
+          alt="balinesa"
+          class="w-24 h-24 rounded-md"
+          width="96"
+          height="96"
+          loading="lazy"
+        />
         } @default {
-        <img src="poolbeach.jfif" alt="default" class="w-24 h-24 rounded-md" />
+        <img
+          src="poolbeach.jfif"
+          alt="default"
+          class="w-24 h-24 rounded-md"
+          width="96"
+          height="96"
+          loading="lazy"
+        />
         } }
       </div>
 
@@ -97,7 +161,9 @@
       </div>
     </div>
     }
+
     <button
+      [disabled]="!captchaVerified"
       aria-label="Reservar"
       (click)="addToCart()"
       (click)="openCartModal()"

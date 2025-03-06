@@ -70,7 +70,6 @@ export class ModalCartComponent {
       (acc: number, item: any) => acc + item.amount * item.price,
       0
     );
-    console.log('Total:', totalPrice);
     
     this.bookingItems = {
       date,
@@ -79,7 +78,6 @@ export class ModalCartComponent {
       totalPrice,
       sunbeds,
     };
-    console.log('Booking:', this.bookingItems);
     
     this.cartService.reserve(this.bookingItems).subscribe(
       (response: any) => {

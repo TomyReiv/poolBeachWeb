@@ -1,14 +1,17 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   HostListener,
+  inject,
   Inject,
   PLATFORM_ID,
 } from '@angular/core';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { SectionService } from '../../services/section.service';
+import { Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -22,11 +25,13 @@ export class MenuComponent {
   isMenuOpen = false; // Estado del menú móvil
   isSticky = false; // Estado para saber si el navbar es fixed
   activeSection = 'Home';
+  private cdr = inject(ChangeDetectorRef);
 
   constructor(
     private router: Router,
     private sectionService: SectionService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private renderer: Renderer2
   ) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -37,9 +42,9 @@ export class MenuComponent {
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      window.onload = () => {
+      setTimeout(() => {
         this.observeSections();
-      };
+      }, 0); // Asegura que se ejecuta después de la renderización
     }
   }
 
@@ -47,7 +52,7 @@ export class MenuComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  redirect(){
+  redirect() {
     window.location.href = '/Home';
   }
 

@@ -32,7 +32,6 @@ export default class ContactComponent {
   onSubmit() {
     if (this.contactForm.valid) {
       const formData = this.contactForm.value;
-      console.log('Formulario enviado con éxito:', formData);
       // Aquí puedes integrar un servicio para enviar el formulario por correo
       alert('Tu mensaje ha sido enviado con éxito.');
       this.contactForm.reset();
