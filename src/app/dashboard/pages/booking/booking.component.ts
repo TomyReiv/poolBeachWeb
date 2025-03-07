@@ -25,6 +25,9 @@ declare const hcaptcha: any;
 declare global {
   interface Window {
     hcaptcha: any;
+    onCaptchaSuccess: (token: string) => void;
+    onCaptchaExpired: () => void;
+    onCaptchaError: () => void;
   }
 }
 
@@ -129,6 +132,11 @@ export default class BookingComponent {
   }
 
   ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.onCaptchaSuccess = (token: string) => this.onCaptchaSuccess(token);
+      window.onCaptchaExpired = () => this.onCaptchaExpired();
+      window.onCaptchaError = () => this.onCaptchaError();
+    }
     setTimeout(() => {
       this.getSundbeds();
       if (this.today === this.date) this.isToday = true;
@@ -175,15 +183,12 @@ export default class BookingComponent {
 
   loadHCaptcha() {
     if (window.hcaptcha) {
-      hcaptcha.render(
-        this.captchaContainer.nativeElement.querySelector('.h-captcha'),
-        {
-          sitekey: '4a2663d6-72f4-43e2-9df4-d88e381e9a28',
-          callback: (token: string) => this.onCaptchaSuccess(token),
-          'expired-callback': () => this.onCaptchaExpired(),
-          'error-callback': () => this.onCaptchaError(),
-        }
-      );
+      window.hcaptcha.render(this.captchaContainer.nativeElement.querySelector('.h-captcha'), {
+        sitekey: '4a2663d6-72f4-43e2-9df4-d88e381e9a28',
+        callback: 'onCaptchaSuccess', // 🔹 Ahora usa el nombre global
+        'expired-callback': 'onCaptchaExpired',
+        'error-callback': 'onCaptchaError'
+      });
     } else {
       console.error('hCaptcha no está cargado');
     }
@@ -192,6 +197,8 @@ export default class BookingComponent {
   onCaptchaSuccess(token: any) {
     this.captchaVerified = true;
     this.captchaToken = token;
+    console.log('Captcha verificado:', this.captchaVerified);
+
     this.cdr.detectChanges();
   }
 
