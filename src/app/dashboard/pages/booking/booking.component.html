@@ -154,9 +154,9 @@
           class="border border-black p-1 rounded-md"
           (change)="updateSelectedItem(item, $event)"
         >
-          @for (number of numbers; track $index) {
+          @for (number of numbers; track $index) { @if(number <= item.amount) {
           <option value="{{ number }}">{{ number }}</option>
-          }
+          }}
         </select>
       </div>
     </div>
